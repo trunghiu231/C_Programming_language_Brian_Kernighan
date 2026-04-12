@@ -1,0 +1,48 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "C/C++: cl.exe build active file",
+            "type": "shell",
+            "command": "cl.exe",
+            "args": [
+                "/Fe:${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "/Fo:${fileDirname}\\${fileBasenameNoExtension}.obj",
+                "${file}",
+                "/link",
+                "/DEBUG:NONE"
+            ],
+            "problemMatcher": ["$msCompile"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": "Clean temp files"
+        },
+        {
+            "label": "Build with cl (clean output)",
+            "type": "shell",
+            "command": "cl.exe",
+            "args": [
+                "/Fe:${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "/Fo:${fileDirname}\\${fileBasenameNoExtension}.obj",
+                "${file}",
+                "/link",
+                "/DEBUG:NONE"
+            ],
+            "problemMatcher": ["$msCompile"],
+            "group": "build",
+            "dependsOn": "Clean temp files"
+        },
+        {
+            "label": "Clean temp files",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "if exist \"${fileDirname}\\${fileBasenameNoExtension}.obj\" del \"${fileDirname}\\${fileBasenameNoExtension}.obj\" && if exist \"${fileDirname}\\${fileBasenameNoExtension}.ilk\" del \"${fileDirname}\\${fileBasenameNoExtension}.ilk\" && if exist \"${fileDirname}\\${fileBasenameNoExtension}.pdb\" del \"${fileDirname}\\${fileBasenameNoExtension}.pdb\""
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
